@@ -11,7 +11,7 @@ DROP PROCEDURE IF EXISTS ComputeAverageWeightedScoreForUser;
 -- Create the procedure
 CREATE PROCEDURE ComputeAverageWeightedScoreForUser(IN user_id INT)
 BEGIN
-    DECLARE avg_score DECIMAL(5,2);  -- Declare variable to store the average score
+    DECLARE avg_score DECIMAL;  -- Declare variable to store the average score
 
     -- Compute the average weighted score from the corrections table
     SELECT SUM(score * weight) / SUM(weight) INTO avg_score  -- Store the result in avg_score variable

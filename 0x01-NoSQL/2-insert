@@ -1,3 +1,5 @@
 // inserts a document in the collection school
-const result = db.school.insertOne({name: "Holberton school"})
+const result = db.school.bulkWrite([
+    { insertOne: { document: { name: "Alex" } } }
+])
 print(`WriteResult({ "nInserted" : ${result.insertedCount} })`);

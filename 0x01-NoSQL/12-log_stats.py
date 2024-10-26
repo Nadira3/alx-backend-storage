@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+""" module that contains database script """
+
+
 from pymongo import MongoClient
 
 client = MongoClient()

@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """ module that contains database script """
 
+
 def main():
+    """ main function housing the script logic """
     from pymongo import MongoClient
 
     client = MongoClient()
@@ -20,6 +22,7 @@ def main():
 
     status_count = collection.count_documents({"path": "/status"})
     print(f"{status_count} status check")
+
 
 if __name__ == "__main__":
     main()

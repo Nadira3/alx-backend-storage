@@ -1,9 +1,6 @@
 -- SQL script that creates a function SafeDiv that divides (and returns) the first
 -- by the second number or returns 0 if the second number is equal to 0
 
--- Drop function if it exists
-DROP FUNCTION IF EXISTS SafeDiv;
-
 -- Set delimiter to avoid conflict in parsing statement
 DELIMITER //
 
@@ -11,10 +8,10 @@ DELIMITER //
 CREATE FUNCTION SafeDiv (
         IN a INT,
         IN b INT
-) RETURNS DECIMAL(10, 6)  -- You can adjust the precision as needed
+) RETURNS DECIMAL(10, 4)  -- You can adjust the precision as needed
 BEGIN
     -- Declare the variable first
-    DECLARE result DECIMAL(10, 6);
+    DECLARE result DECIMAL(10, 4);
     
     -- Check if the second number is 0
     IF b = 0 THEN

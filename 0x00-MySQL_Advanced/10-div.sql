@@ -11,9 +11,9 @@ DELIMITER //
 CREATE FUNCTION SafeDiv (
     IN a INT,
     IN b INT
-) RETURNS DECIMAL(10, 6)
+) RETURNS DOUBLE
 BEGIN
-    DECLARE result DECIMAL(10, 6);
+    DECLARE result DOUBLE;
 
     IF b = 0 THEN
         RETURN 0; -- Return 0 if b is 0

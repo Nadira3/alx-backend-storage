@@ -8,4 +8,4 @@ const result = db.school.bulkWrite([
     }
 ])
 
-print(`WriteResult({ "nMatched" : ${result.matchedCount}, "nUpserted" : ${result.upsertedCount}, "nModified" : ${result.insertedCount}})`);
+print(`WriteResult({ "nMatched" : ${result.matchedCount}, "nUpserted" : ${result.upsertedCount}, "nModified" : ${result.matchedCount} })`);

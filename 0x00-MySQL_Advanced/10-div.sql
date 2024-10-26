@@ -3,18 +3,13 @@
 
 -- Set delimiter to avoid conflict in parsing statement
 DELIMITER //
-
+DROP FUNCTION IF EXISTS SafeDiv;
 -- Create function to handle logic
-CREATE FUNCTION SafeDiv (
-    a INT,
-    b INT
-) RETURNS DOUBLE
+CREATE FUNCTION SafeDiv(a INT, b INT) RETURNS DOUBLE
 BEGIN
     IF b = 0 THEN
-        RETURN 0; -- Return 0 if b is 0
+        RETURN 0; 
     ELSE
-        RETURN a / b; 
+        RETURN CAST(a AS DECIMAL(20,15)) / CAST(b AS DECIMAL(20,15));
     END IF;
-END //
-
-DELIMITER ;
+END

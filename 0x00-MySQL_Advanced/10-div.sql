@@ -6,22 +6,14 @@ DELIMITER //
 
 -- Create function to handle logic
 CREATE FUNCTION SafeDiv (
-    IN a INT,
-    IN b INT
+    a INT,
+    b INT
 ) RETURNS DOUBLE
 BEGIN
-    DECLARE result DOUBLE;
-
     IF b = 0 THEN
         RETURN 0; -- Return 0 if b is 0
     ELSE
-        SET result = a / b; -- Perform the division
-
-        IF result = FLOOR(result) THEN
-            RETURN CAST(result AS UNSIGNED); -- Return as INT
-        ELSE
-            RETURN result; -- Return as DECIMAL
-        END IF;
+        RETURN a / b; 
     END IF;
 END //
 

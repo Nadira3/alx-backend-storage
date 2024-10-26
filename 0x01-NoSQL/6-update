@@ -1,2 +1,11 @@
 // adds a new attribute to a document in the collection school
-db.school.updateMany({name: "Holberton school"}, {$set: {address: "972 Mission street"}})
+const result = db.school.bulkWrite([
+    {
+        updateMany: {
+            filter: { name: "Holberton school" },
+            update: { $set: { address: "972 Mission street" } }
+        }
+    }
+])
+
+print(`WriteResult({ "nMatched" : ${result.matchedCount}, "nUpserted" : ${result.upsertedCount}, "nModified" : ${result.insertedCount}})`);

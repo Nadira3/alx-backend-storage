@@ -31,8 +31,12 @@ def main():
 
     results = collection.aggregate(pipeline)
     print("IPs:")
+    counter = 0
     for result in results:
-        print(f"{result['_id']}: {result['count']}")
+        if counter == 10:
+            break
+        print(f"\t{result['_id']}: {result['count']}")
+        counter += 1
 
 
 if __name__ == "__main__":

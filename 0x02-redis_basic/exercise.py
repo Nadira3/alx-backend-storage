@@ -2,11 +2,11 @@
 
 import redis
 import uuid
-from typing import Any, Optional, Union
+from typing import Optional, Union, Callable
 
 
 class Cache:
-    """ class that creates a cache """
+    """ Class that creates a cache. """
 
     def __init__(self) -> None:
         self._redis = redis.Redis()
@@ -17,16 +17,19 @@ class Cache:
         self._redis.set(key, data)  # Store the data in Redis
         return key  # Return the key as a string
 
-    def get(self, key: str, fn) -> Optional[Any]:
-        """Retrieve value by key and apply the conversion function."""
-        return fn(self._redis.get(key))
+    def get(self, key: str, fn: Optional[Callable] = None)\
+            -> Optional[Union[str, int]]:
+        """Retrieve value by key and optionally
+            apply the conversion function."""
+        value = self._redis.get(key)
+        if fn and value is not None:
+            return fn(value)
+        return value
 
     def get_str(self, key: str) -> Optional[str]:
         """Retrieve string value by key."""
-        value = self._redis.get(key)
-        return value.decode() if value else None
+        return self.get(key, lambda x: x.decode() if x else None)
 
     def get_int(self, key: str) -> Optional[int]:
         """Retrieve integer value by key."""
-        value = self._redis.get(key)
-        return int(value) if value is not None else None
+        return self.get(key, lambda x: int(x) if x is not None else None)

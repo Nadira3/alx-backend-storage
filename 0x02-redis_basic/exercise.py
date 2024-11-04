@@ -32,6 +32,25 @@ def call_history(method: Callable) -> Callable:
         return res
     return wrapper
 
+def replay(method):
+    # 1. Define the qualified name
+    qualname = method.__qualname__
+    
+    # 2. Define Redis keys for inputs and outputs
+    input_key = f"{qualname}:inputs"
+    output_key = f"{qualname}:outputs"
+    
+    # 3. Retrieve lists of inputs and outputs from Redis
+    inputs = method.__self__._redis.lrange(input_key, 0, -1)
+    outputs = method.__self__._redis.lrange(output_key, 0, -1)
+    
+    # 4. Print the total number of calls
+    print(f"{qualname} was called {len(inputs)} times:")
+
+    # 5. Loop over inputs and outputs together
+    for input_val, output_val in zip(inputs, outputs):
+        print(f"{qualname}(*{input_val}) -> {output_val}")
+
 class Cache:
     """ Class that creates a cache. """
 

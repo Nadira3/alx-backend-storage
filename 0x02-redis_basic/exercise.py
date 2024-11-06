@@ -12,8 +12,7 @@ def count_calls(method: Callable) -> Callable:
     @wraps(method)
     def wrapper(self, *args, **kwargs):
         # Use `method.__qualname__` as a unique key to track call count
-        key = method.__qualname__
-        self._redis.incr(key)  # Increment the call count
+        self._redis.incr(method.__qualname__)  # Increment the call count
         return method(self, *args, **kwargs)  # Call the original method
     return wrapper
 
@@ -50,6 +49,7 @@ def replay(method):
     # 5. Loop over inputs and outputs together
     for input_val, output_val in zip(inputs, outputs):
         print(f"{qualname}(*{input_val}) -> {output_val}")
+
 
 class Cache:
     """ Class that creates a cache. """

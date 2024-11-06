@@ -55,7 +55,10 @@ def replay(method):
 
     # 5. Loop over inputs and outputs together
     for input_val, output_val in zip(inputs, outputs):
-        print(f"{qualname}(*{method.get_str(input_val)}) -> {method.get_str(output_val)}")
+        # Decode input and output values from Redis directly
+        input_str = input_val.decode('utf-8')
+        output_str = output_val.decode('utf-8')
+        print(f"{qualname}(*{input_str}) -> {output_str}")
 
 
 class Cache:

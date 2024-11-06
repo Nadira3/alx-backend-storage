@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+""" module containing redis functions """
 import redis
 import uuid
 from typing import Optional, Union, Callable

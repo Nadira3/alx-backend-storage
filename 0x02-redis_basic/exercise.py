@@ -9,10 +9,11 @@ from functools import wraps
 
 def count_calls(method: Callable) -> Callable:
     """Decorator to count the number of times a method is called."""
+    key = method.__qualname__
     @wraps(method)
     def wrapper(self, *args, **kwargs):
         # Use `method.__qualname__` as a unique key to track call count
-        self._redis.incr(method.__qualname__)  # Increment the call count
+        self._redis.incr(key)  # Increment the call count
         return method(self, *args, **kwargs)  # Call the original method
     return wrapper
 
